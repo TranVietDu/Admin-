@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Students;
 use Illuminate\Http\Request;
 use App\Services\StudentService;
@@ -38,7 +40,7 @@ class StudentController extends Controller
         $admin=Auth::user();
         return view('admin.addstudent',['user'=>$admin]);
     }
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
         $this->studentService->store($request);
         return redirect()->route('students.index');
@@ -66,7 +68,7 @@ class StudentController extends Controller
         $admin=Auth::user();
         return view('admin.updatestudent',compact('student'),['user'=>$admin]);
     }
-    public function update(Request $request, Students $student)
+    public function update(UpdateStudentRequest $request, Students $student)
     {
         $this->studentService->update($request,$student);
         return redirect()->route('students.index');

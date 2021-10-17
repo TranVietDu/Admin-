@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreClassRequest;
+use App\Http\Requests\UpdateClassRequest;
 use App\Models\Classs;
 use Illuminate\Http\Request;
 use App\Services\ClasssService;
@@ -38,7 +40,7 @@ class ClasssController extends Controller
         $admin=Auth::user();
         return view('admin.addclass',['user'=>$admin]);
     }
-    public function store(Request $request)
+    public function store(StoreClassRequest $request)
     {
         $this->classsService->store($request);
         return redirect()->route('classs.index');
@@ -66,7 +68,7 @@ class ClasssController extends Controller
         $admin=Auth::user();
         return view('admin.updateclass',compact('classs'),['user'=>$admin]);
     }
-    public function update(Request $request, Classs $classs)
+    public function update(UpdateClassRequest $request, Classs $classs)
     {
         $this->classsService->update($request,$classs);
         return redirect()->route('classs.index');

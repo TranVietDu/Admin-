@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreClassRequest;
+use App\Http\Requests\UpdateClassRequest;
 use Illuminate\Http\Request;
 use App\Models\Classs;
 
@@ -18,11 +20,8 @@ class ClasssService
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClassRequest $request)
     {
-        $classs=$request->validate([
-            'nameclass'=>'required|max:100'
-        ]);
         $classs=new Classs();
         $classs->nameclass=$request->nameclass;
         $classs->save();
@@ -46,11 +45,8 @@ class ClasssService
      * @param  \App\Models\Classs  $classs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classs $classs)
+    public function update(UpdateClassRequest $request, Classs $classs)
     {
-        $request->validate([
-            'nameclass'=>'required'
-        ]);
         $classs->nameclass=$request->nameclass;
         $classs->save();
     }

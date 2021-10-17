@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use Illuminate\Http\Request;
 use App\Models\Students;
 
@@ -23,12 +25,8 @@ class StudentService
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        $student = $request->validate([
-            'name' => 'required|max:100|min:5',
-            'age' => 'required:max:100'
-        ]);
         $student = new Students;
         $student->name = $request->name;
         $student->age = $request->age;
@@ -53,12 +51,8 @@ class StudentService
      * @param  \App\Models\Students  $students
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Students $student)
+    public function update(UpdateStudentRequest $request, Students $student)
     {
-        $request->validate([
-            'name' => 'required|max:100|min:4',
-            'age' => 'required:max:100'
-        ]);
         $student->name = $request->name;
         $student->age = $request->age;
         $student->save();
