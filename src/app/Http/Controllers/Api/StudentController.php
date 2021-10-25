@@ -9,6 +9,7 @@ use App\Models\Students;
 use Illuminate\Http\Request;
 use App\Services\StudentService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -83,6 +84,11 @@ class StudentController extends Controller
     public function destroy(Students $student)
     {
         $this->studentService->destroy($student);
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('thongbao','Successful Delete');
+    }
+    public function deleteAll(Request $request)
+    {
+        $this->studentService->deleteAll($request);
+        return response()->json(['success'=>"Student Deleted successfully."]);
     }
 }

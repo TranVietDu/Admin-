@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
 class AuthController extends Controller
 {
 
@@ -24,7 +23,14 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $check = $this->create($data);
-        return redirect("login");
+        if($check){
+            return redirect("login")->with('thongbao1','Đăng kí thành công');
+        }
+        else{
+            return back()->withInput(
+                $request->only('email','name')
+            );
+        }
     }
 
     public function index()
@@ -38,7 +44,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials,$remember)) {
             return redirect()->route('home');
         } else {
-            return redirect()->route('relogin');
+            return back()->withInput(
+                $request->only('email')
+            )->with('thongbao','Email hoặc mật khẩu không đúng');
         }
     }
 

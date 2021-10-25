@@ -20,7 +20,7 @@ class AuthMiddleware
            return $next($request);
         }
         else{
-           return redirect()->route('relogin');
+           return redirect()->route('relogin')->with('thongbao','Vui lòng đăng nhập');
         }
     }
 }

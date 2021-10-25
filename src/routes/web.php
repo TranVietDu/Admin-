@@ -20,7 +20,7 @@ Route::get('/register', function () {
     return view('register');
 });
 Route::post('/register', 'App\Http\Controllers\AuthController@register')->name('register');
-Route::get('/login', 'App\Http\Controllers\AuthController@index')->name('relogin');
+Route::get('/login', 'App\Http\Controllers\AuthController@index')->name('relogin')->middleware('login');
 Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
@@ -42,6 +42,8 @@ Route::middleware(['user'])->group(function () {
         Route::get('students/{student}', 'StudentController@edit')->name('students.edit');
         Route::get('addclass', 'ClasssController@create')->name('classs.create');
         Route::get('classs/{classs}', 'ClasssController@edit')->name('classs.edit');
+        Route::get('studentDeleteAll', 'StudentController@deleteAll')->name('deleteallstudent');
+        Route::get('classDeleteAll', 'ClasssController@deleteAll')->name('deleteallclass');
     });
 });
 

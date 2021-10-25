@@ -76,4 +76,8 @@ class ClasssService
         }
         return $hi;
     }
+    public function deleteAll(Request $request){
+        $ids=$request->ids;
+        Classs::whereIn('id',$ids)->delete();
+    }
 }

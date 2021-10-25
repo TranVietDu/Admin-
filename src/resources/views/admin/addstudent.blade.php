@@ -21,6 +21,11 @@
                     </tr>
                 </thead>
             </table>
+            <ul class="alert text-danger">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
             <button class="btn btn-primary" type="submit">Add</button>
         </form>
 </div>

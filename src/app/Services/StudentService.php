@@ -68,4 +68,9 @@ class StudentService
     {
         $student->delete();
     }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Students::whereIn('id',$ids)->delete();
+    }
 }

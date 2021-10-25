@@ -23,11 +23,11 @@
                                         <form method="post" action="{{route('register')}}">
                                             @csrf
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="name" id="inputName" type="text" placeholder="Name" />
+                                                <input class="form-control" name="name" id="inputName" value="{{ old('name') }}" type="text" placeholder="Name" />
                                                 <label for="inputName">User Name</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" name="email" id="inputEmail" value="{{ old('email') }}" type="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="row mb-3">
@@ -44,6 +44,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <ul class="alert text-danger">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                             </ul>
                                             <div class="mt-4 mb-0">
                                                 <div class="text-center">
                                                 <button type="submit" class="btn btn-primary">Create Account</button>

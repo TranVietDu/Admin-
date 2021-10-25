@@ -83,7 +83,7 @@ class ClasssController extends Controller
     public function destroy(Classs $classs)
     {
         $this->classsService->destroy($classs);
-        return redirect()->route('classs.index');
+        return redirect()->route('classs.index')->with('thongbao','Successful Delete');
     }
     public function countStudentInClass(Classs $classs){
         return $this->classsService->countStudentInClass($classs);
@@ -96,5 +96,9 @@ class ClasssController extends Controller
     }
     public function allStudentAllClass(Classs $classs){
         return $this->classsService->allStudentAllClass($classs);
+    }
+    public function deleteAll(Request $request){
+        $this->classsService->deleteAll($request);
+        return response()->json(['success'=>"Class Deleted successfully."]);
     }
 }

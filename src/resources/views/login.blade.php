@@ -26,8 +26,13 @@
                                 <div class="card-body">
                                     <form action="{{route('login')}}" method="post">
                                         @csrf
+                                        @if (session('thongbao1'))
+                                        <div class="alert alert-success hide">
+                                            {{session('thongbao1')}}
+                                        </div>
+                                        @endif
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
+                                            <input class="form-control" name="email" value="{{ old('email') }}" id="inputEmail" type="email" placeholder="name@example.com" />
                                             <label for="inputEmail">Email address</label>
                                         </div>
                                         <div class="form-floating mb-3">
@@ -35,10 +40,15 @@
                                             <label for="inputPassword">Password</label>
                                         </div>
                                         <ul class="alert text-danger">
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
                                         </ul>
+                                        @if (session('thongbao'))
+                                        <div class="alert alert-danger">
+                                            {{session('thongbao')}}
+                                        </div>
+                                        @endif
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" name="remember" id="inputRememberPassword" type="checkbox" value="1" />
                                             <label class="form-check-label" for="inputRememberPassword">Remember Password</label>

@@ -30,4 +30,13 @@ class RegisterRequest extends FormRequest
             'repassword' => 'required|min:6'
         ];
     }
+    public function messages()
+    {
+        return[
+            'name.required' => 'Tên không được để trống',
+            'email.required'=> 'Email không được để trống',
+            'password.required'=>'Mật khẩu không được để trống',
+            'repassword.required'=>'Vui lòng nhập lại mật khẩu',
+        ];
+    }
 }
